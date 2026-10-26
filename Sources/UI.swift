@@ -476,7 +476,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
         // Cheap: mostly a local file read. The store decides when the network is worth it.
         timer = Timer.scheduledTimer(withTimeInterval: 15, repeats: true) { [weak self] _ in
-            Task { @MainActor in
+            Task { @MainActor [weak self] in
                 self?.store.refresh()
                 self?.updateButton() // so a window that just reset drops to 0 without new data
             }
